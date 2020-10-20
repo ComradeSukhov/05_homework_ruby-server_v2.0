@@ -1,8 +1,8 @@
 class CostManager
-  attr_accessor :data, :price  
+  attr_accessor :data, :prices  
 
   def initialize(data, price)
-    @data  = data
+    @data   = data
     @prices = price
   end
 
@@ -14,7 +14,7 @@ class CostManager
     end
   end
 
-  def calc_cost(vm)
+  def calc_cost(vm = @data)
     cpu_price = find_price('cpu')
     ram_price = find_price('ram')
     hdd_price = find_price(vm.hdd_type)
@@ -42,11 +42,11 @@ class CostManager
 
   def clac_add_hdd(vm)
     add_hdd_cost = vm.addit_hdd.map do |hdd|
-                     hdd_type     = hdd[:hdd_type]
-                     hdd_capacity = hdd[:hdd_capacity]
+                        hdd_type     = hdd[:hdd_type]
+                        hdd_capacity = hdd[:hdd_capacity]
 
-                     hdd_capacity * find_price(hdd_type)
-                   end
+                        hdd_capacity * find_price(hdd_type)
+                      end
     add_hdd_cost.sum
   end
 end
