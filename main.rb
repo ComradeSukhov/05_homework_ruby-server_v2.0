@@ -1,13 +1,8 @@
 require_relative 'classes/csv_reader'
 require_relative 'classes/vm'
-require_relative 'classes/costmanager'
-require_relative 'classes/selecter'
-require_relative 'classes/reporter'
-require_relative 'classes/report_controller'
+require_relative 'classes/cost_manager'
+require_relative 'classes/response_controller'
+require_relative 'classes/server'
+require_relative 'classes/request_reader'
 
-report = ReportController.new
-report.most_expensive(10)
-report.cheapest(10)
-report.most_voluminous_by_type('sata', 10)
-report.most_add_hdd_by_quant(10)
-report.most_add_hdd_by_vol(10)
+server = Server.new(3000).raise_session
