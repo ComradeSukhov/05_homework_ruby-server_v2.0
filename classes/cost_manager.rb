@@ -1,20 +1,12 @@
 class CostManager
-  attr_accessor :data, :prices  
+  attr_accessor :vm, :prices  
 
-  def initialize(data, price)
-    @data   = data
+  def initialize(vm, price)
+    @vm     = vm
     @prices = price
   end
 
-  def set_cost
-    if @data.class == Array
-      @data.each { |vm| vm.cost = calc_cost(vm) }
-    else
-      @data.cost = calc_cost(vm)
-    end
-  end
-
-  def calc_cost(vm = @data)
+  def calc_cost(vm = @vm)
     cpu_price = find_price('cpu')
     ram_price = find_price('ram')
     hdd_price = find_price(vm.hdd_type)
@@ -41,12 +33,12 @@ class CostManager
   end
 
   def clac_add_hdd(vm)
-    add_hdd_cost = vm.addit_hdd.map do |hdd|
-                        hdd_type     = hdd[:hdd_type]
-                        hdd_capacity = hdd[:hdd_capacity]
+    add_hdd_costs = vm.addit_hdd.map do |hdd|
+                         type     = hdd[:type]
+                         capacity = hdd[:capacity]
 
-                        hdd_capacity * find_price(hdd_type)
-                      end
-    add_hdd_cost.sum
+                         capacity * find_price(type)
+                       end
+    add_hdd_costs.sum
   end
 end
