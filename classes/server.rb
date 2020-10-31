@@ -4,7 +4,7 @@ require 'json'
 class Server
   attr_reader :server
 
-  def initialize(port = 5000)
+  def initialize(port = 3001)
     @server = TCPServer.new port
   end
 

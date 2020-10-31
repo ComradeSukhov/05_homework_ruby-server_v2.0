@@ -4,5 +4,5 @@ WORKDIR /app
 
 COPY . .
 
-EXPOSE 3000
+EXPOSE 3001
 CMD ["ruby", "main.rb"]

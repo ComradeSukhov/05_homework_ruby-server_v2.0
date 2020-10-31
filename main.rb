@@ -5,4 +5,4 @@ require_relative 'classes/response_controller'
 require_relative 'classes/server'
 require_relative 'classes/request_reader'
 
-server = Server.new(3000).raise_session
+server = Server.new(3001).raise_session
