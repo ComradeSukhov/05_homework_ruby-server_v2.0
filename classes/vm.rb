@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class VM
   attr_accessor :cpu, :ram, :hdd_type, :hdd_capacity, :addit_hdd, :cost
 

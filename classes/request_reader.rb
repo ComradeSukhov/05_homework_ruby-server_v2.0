@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RequestReader
   attr_accessor :request
 
@@ -6,15 +8,13 @@ class RequestReader
   end
 
   def result
-    result = {
-               cpu: @request.match(/cpu=(\d+)/)[1].to_i,
-               ram: @request.match(/ram=(\d+)/)[1].to_i,
-          hdd_type: @request.match(/hdd_type=(\w+)/)[1],
+    {
+      cpu: @request.match(/cpu=(\d+)/)[1].to_i,
+      ram: @request.match(/ram=(\d+)/)[1].to_i,
+      hdd_type: @request.match(/hdd_type=(\w+)/)[1],
       hdd_capacity: @request.match(/hdd_capacity=(\d+)/)[1].to_i,
-         addit_hdd: addit_hdd 
+      addit_hdd: addit_hdd
     }
-
-    result
   end
 
   # Метод ищет в запросе конфигурации дополнительных дисков
@@ -23,9 +23,9 @@ class RequestReader
     # Пример строчки которая подходит под регулярное выражение:
     # disks[]=sata&disks[]=32
     disks = @request.scan(/disks\[\]=(\d+|\w+)&disks\[\]=(\d+|\w+)/)
-    return [] if disks == nil
+    return [] if disks.nil?
 
-    # Преобразуем двумерный массив таким образом, что бы каждый подмассив был хэшем
+    # Преобразуем двумерный массив таким образом, что бы каждый элемент был хэшем
     # с ключами type и capacity
     disks.map! do |disk|
       new_disk = {}
@@ -34,8 +34,7 @@ class RequestReader
 
       new_disk
     end
-    
-     disks
-  end
 
+    disks
+  end
 end
